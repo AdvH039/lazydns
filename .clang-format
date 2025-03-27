@@ -1,0 +1,11 @@
+BasedOnStyle: llvm  # Base style (can be Google, Mozilla, etc.)
+IndentWidth: 4      # Set indentation width to 4 spaces
+UseTab: Never       # Use spaces instead of tabs
+ColumnLimit: 0      # Prevents breaking long lines automatically
+ReflowComments: false  # Prevents reformatting comments
+BraceWrapping:
+  AfterFunction: true  # Ensures proper spacing after function definitions
+  AfterClass: true     # Ensures spacing after class definitions
+  AfterControlStatement: true  # Adds spacing after if/while/for
+AllowShortIfStatementsOnASingleLine: false  # Forces if statements to be multiline
+AllowShortLoopsOnASingleLine: false  # Ensures loop bodies are properly spaced
