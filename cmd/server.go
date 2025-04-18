@@ -4,13 +4,13 @@ import (
 	//"os"
 	"log"
 
-	"github.com/NetworkInCode/dns-query-delay-injector-ebpf-AdvH039/daemon"
+	"github.com/NetworkInCode/dns-query-delay-injector-ebpf-AdvH039/pkg"
 	"github.com/spf13/cobra"
 	//"bufio"
 	//"time"
 )
 
-func NewServerCmd(backend *daemon.AppBackend) *cobra.Command {
+func NewServerCmd(backend *pkg.AppBackend) *cobra.Command {
 
 	serverCmd := &cobra.Command{
 		Use:   "server",

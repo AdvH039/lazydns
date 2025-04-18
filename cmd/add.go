@@ -6,13 +6,13 @@ import (
 	//"bufio"
 	//"time"
 
-	"github.com/NetworkInCode/dns-query-delay-injector-ebpf-AdvH039/daemon"
-	"github.com/NetworkInCode/dns-query-delay-injector-ebpf-AdvH039/daemon/debug"
+	"github.com/NetworkInCode/dns-query-delay-injector-ebpf-AdvH039/pkg"
+	"github.com/NetworkInCode/dns-query-delay-injector-ebpf-AdvH039/pkg/debug"
 	"github.com/NetworkInCode/dns-query-delay-injector-ebpf-AdvH039/utils"
 	"github.com/spf13/cobra"
 )
 
-func NewAdditionCmd(backend *daemon.AppBackend) *cobra.Command {
+func NewAdditionCmd(backend *pkg.AppBackend) *cobra.Command {
 	var addCmd = &cobra.Command{
 		Use:   "add [interface]",
 		Short: "Attach an eBPF program to a network interface",

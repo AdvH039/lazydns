@@ -2,13 +2,13 @@ package main
 
 import (
 	"github.com/NetworkInCode/dns-query-delay-injector-ebpf-AdvH039/cmd"
-	"github.com/NetworkInCode/dns-query-delay-injector-ebpf-AdvH039/daemon"
+	"github.com/NetworkInCode/dns-query-delay-injector-ebpf-AdvH039/pkg"
 	"github.com/spf13/cobra"
 	"os"
 )
 
 func main() {
-	backend := daemon.NewAppBackend()
+	backend := pkg.NewAppBackend()
 	rootCmd := &cobra.Command{
 		Use:   "lazydns",
 		Short: "lazydns - An eBPF-based DNS manipulation tool",

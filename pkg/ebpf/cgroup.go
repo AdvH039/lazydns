@@ -1,12 +1,12 @@
 package ebpf
 
 import (
-	"os"
-	"regexp"
 	"context"
+	"fmt"
 	"github.com/docker/docker/client"
 	"golang.org/x/sys/unix"
-	"fmt"
+	"os"
+	"regexp"
 )
 
 const (
@@ -64,4 +64,3 @@ func getCgroupID(containerID string) (uint64, error) {
 
 	return stat.Ino, nil
 }
-

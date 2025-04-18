@@ -4,13 +4,13 @@ import (
 	//"os"
 	"log"
 
-	"github.com/NetworkInCode/dns-query-delay-injector-ebpf-AdvH039/daemon"
+	"github.com/NetworkInCode/dns-query-delay-injector-ebpf-AdvH039/pkg"
 	"github.com/spf13/cobra"
 	//"bufio"
 	//"time"
 )
 
-func NewUrlCmd(backend *daemon.AppBackend) *cobra.Command {
+func NewUrlCmd(backend *pkg.AppBackend) *cobra.Command {
 
 	urlCmd := &cobra.Command{
 		Use:   "url",

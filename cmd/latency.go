@@ -2,12 +2,12 @@ package cmd
 
 import (
 	"fmt"
-	"github.com/NetworkInCode/dns-query-delay-injector-ebpf-AdvH039/daemon"
+	"github.com/NetworkInCode/dns-query-delay-injector-ebpf-AdvH039/pkg"
 	"github.com/spf13/cobra"
 	"strconv"
 )
 
-func NewLatencySubCmd(backend *daemon.AppBackend) *cobra.Command {
+func NewLatencySubCmd(backend *pkg.AppBackend) *cobra.Command {
 
 	var latencyCmd = &cobra.Command{
 		Use:   "latency [value]",

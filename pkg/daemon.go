@@ -1,8 +1,8 @@
-package daemon
+package pkg
 
 import (
-	"github.com/NetworkInCode/dns-query-delay-injector-ebpf-AdvH039/daemon/debug"
-	"github.com/NetworkInCode/dns-query-delay-injector-ebpf-AdvH039/daemon/ebpf"
+	"github.com/NetworkInCode/dns-query-delay-injector-ebpf-AdvH039/pkg/debug"
+	"github.com/NetworkInCode/dns-query-delay-injector-ebpf-AdvH039/pkg/ebpf"
 )
 
 type AppBackend struct {

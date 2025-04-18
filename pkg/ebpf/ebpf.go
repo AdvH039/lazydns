@@ -17,6 +17,9 @@ import (
 
 	"github.com/cilium/ebpf"
 	"github.com/cilium/ebpf/link"
+	tc "github.com/florianl/go-tc"
+	"github.com/florianl/go-tc/core"
+	"golang.org/x/sys/unix"
 )
 
 const (
@@ -56,9 +59,50 @@ func CreateDaemon() *EbpfDaemon {
 	return ebpfDaemon
 }
 
+func ensureFqdisc(ifIndex uint32) error {
+
+	tcnl, err := tc.Open(&tc.Config{})
+	if err != nil {
+		return err
+	}
+	defer func() {
+		if err := tcnl.Close(); err != nil {
+			return
+		}
+	}()
+
+	limit := uint32(100)
+	qdisc := tc.Object{
+		Msg: tc.Msg{
+			Family:  unix.AF_UNSPEC,
+			Ifindex: ifIndex,
+			Handle:  core.BuildHandle(0x1, 0x0),
+			Parent:  tc.HandleRoot,
+		},
+		Attribute: tc.Attribute{
+			Kind: "fq",
+			Fq: &tc.Fq{
+				PLimit: &limit,
+			},
+		},
+	}
+
+	return tcnl.Qdisc().Replace(&qdisc)
+
+}
+
 func (edaemon *EbpfDaemon) Attach(ifaceName string) error {
 
 	iface, err := net.InterfaceByName(ifaceName)
+	if err != nil {
+		return err
+	}
+
+	err = ensureFqdisc(uint32(iface.Index))
+	if err != nil {
+		return err
+	}
+
 	link1, err := link.AttachTCX(link.TCXOptions{
 		Interface: iface.Index,
 		Program:   edaemon.objects.IngressProgFunc,
