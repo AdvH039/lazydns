@@ -122,13 +122,15 @@ Users can maunually test by executing the commands and noting the latency and ot
 ## TODOS
 - Testing - I have to come up with a setting that does not decrease the response time of the packet with every iteration. I tried a simple local server and client but the packet doesn't seem to pass through the routing interface. Right now the ebpf program only responds to dns packets but I found the best way to test the logic of the qdisc was through ping and allow the ebpf program to accept all packets.
 
--  For process-based filtering a cgroup-egress program and a `tcx` program must communicate through a hash map using dns id as a unique identifier. (this will take time.) Containers would be uniquely identified by their cgroup id and every container will have a cgroup-egress program hooked to its cgroup path that lists all the dns ids of all dns packets that pass through it in a map which is shared with the tcx program that adds latency to only those listed ids. I was able to hook the program to a specific cgroup successfully but was not able to parse the ethernet hdr. It was not a normal ip packet.    :(  )
+-  For process-based filtering a cgroup-egress program and a `tcx` program must communicate through a hash map using dns id as a unique identifier. (this will take time.) Containers would be uniquely identified by their cgroup id and every container will have a cgroup-egress program hooked to its cgroup path that lists all the dns ids of all dns packets that pass through it in a map which is shared with the tcx program that adds latency to only those listed ids. ~~~I was able to hook the program to a specific cgroup successfully but was not able to parse the ethernet hdr. It was not a normal ip packet.    :(  )~~~ I have to parse the packet starting from ip header in the cgroup as it does not have ethernet header.
 
-- Automate qdisc replacement
+- ~~Automate qdisc replacement~~
 
-- Support lower kernel versions
+- Support lower kernel versions( Use tc library itself for attaching programs?)
 
-- Use interfaces to make filter development clean and uniform
+- Use interfaces to make filter development clean and uniform (What is the best design implementation ?)
+
+- Use a yaml format to employ better schema for filters? How translate the filter schema within the ebpf program?(Advanced)
 
 
 ![Screenshot from 2025-03-26 19-33-19](https://github.com/user-attachments/assets/1618eab8-ac79-4936-8380-f7243c713096)
